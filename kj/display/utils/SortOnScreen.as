@@ -2,6 +2,7 @@
 	
 	import kj.utils.StaticClass
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 
@@ -60,6 +61,21 @@
 				item.x = base.x + base.width /2 - item.width /2;
 				item.y = base.y + base.height /2 - item.height /2;
 			}
+		}
+		public static function star(items:Array, area:Rectangle):void {
+			if (items.length != 5) {
+				throw new Error("For a star you need just 5 items");
+			}
+			items[0].x = area.x + area.width /2;
+			items[0].y = area.top;
+			items[1].x = area.left;
+			items[1].y = area.y + area.height * 2/5;
+			items[2].x = area.right;
+			items[2].y = area.y + area.height * 2/5;
+			items[3].x = area.x + area.width * 1/5;
+			items[3].y = area.bottom;
+			items[4].x = area.x + area.width * 4/5;
+			items[4].y = area.bottom;
 		}
 	}
 }
