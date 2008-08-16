@@ -1,18 +1,17 @@
 ﻿package kj.events
 {
-	import flash.events.Event;
-
-	public class LinkedListEvent extends Event
+	/**
+	 * Una classe di eventi legata agli elementi delle linkedList.
+	 * @see kj.collections.LinkedList
+	 */
+	public class LinkedListEvent extends EventContainer
 	{
 		public static const ITEM_ADDED:String = "itemAdded";
 		public static const ITEM_REMOVED:String = "itemRemoved";
 		
-		public var element:Object;
-		
 		public function LinkedListEvent(type:String, elem:Object)
 		{
-			super(type);
-			element = elem;
+			super(type, elem);
 		}
 	}
 }
