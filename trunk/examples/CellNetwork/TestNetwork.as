@@ -19,15 +19,15 @@
 			var pad:Number = 50;
 			SortOnScreen.star(new Array(c0.display, c1.display, c2.display, c3.display, c4.display), new Rectangle(pad, pad, stage.stageWidth - 2*pad, stage.stageHeight - 2*pad));
 			
-			c0.vicini.enqueue(c1);
-			c0.vicini.enqueue(c2);
-			c0.vicini.enqueue(c3);
-			c0.vicini.enqueue(c4);
-			c1.vicini.enqueue(c2);
-			c1.vicini.enqueue(c3);
-			c2.vicini.enqueue(c4);
-			c3.vicini.enqueue(c1);
-			c3.vicini.enqueue(c4);
+			c0.addArc(c1);
+			c0.addArc(c2);
+			c0.addArc(c3);
+			c0.addArc(c4);
+			c1.addArc(c2);
+			c1.addArc(c3);
+			c2.addArc(c4);
+			c3.addArc(c1);
+			c3.addArc(c4);
 			
 			addChild(c0.display);
 			addChild(c1.display);
