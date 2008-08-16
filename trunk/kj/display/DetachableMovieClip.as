@@ -3,11 +3,6 @@
 	import flash.display.DisplayObjectContainer;
 
 	public class DetachableMovieClip extends MovieClip implements IDetachable {
-
-		public function get container():DisplayObjectContainer {
-			if (attached) return parent;
-			else return null;
-		}
 		
 		public function attach(c:DisplayObjectContainer):void
 		{
