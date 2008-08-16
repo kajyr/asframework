@@ -10,7 +10,7 @@
 		}
 		
 		public static function randInt(min:Number = 0, max:Number = 1):uint {
-			return Math.round(Math.random() * (max - min + 1) + min);
+			return Math.round(Math.random() * (max - min) + min);
 		}
 		
 		public static function randNumber(n:Number = 1):int {

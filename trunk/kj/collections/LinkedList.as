@@ -2,6 +2,7 @@
 	
 	import flash.events.EventDispatcher;
 	import kj.events.LinkedListEvent;
+	import com.carlcalderon.arthropod.Debug;
 
 	public class LinkedList extends EventDispatcher {
 
@@ -29,7 +30,7 @@
 		*/
 		public function enqueue(x:Object):void {
 			if ( isEmpty( ) ) {
-				back = front = new LinkedListNode(x);
+				back = front = new LinkedListNode( x );
 			} else {
 				var tmp:LinkedListNode = back;
 				back = back.next = new LinkedListNode( x );
@@ -83,23 +84,29 @@
 		
 		public function remove(x:Object):Object {
 			if (isEmpty()) {
-				throw new Error("LinkedList remove");
+				throw new Error("Cannot remove elements from an empty list");
 			}
 			var tmp:LinkedListNode = front;
 			while (tmp != null) {
-				if (tmp.object === x) {
+				if (tmp.object == x) {
+					//Debug.log(tmp.object + " == " + x + " ?: " + (tmp.object == x), Debug.YELLOW);
 					if (tmp.prev) {
 						tmp.prev.next = tmp.next;
+					} else {
+						front = front.next;
 					}
+					//Debug.log((tmp.prev == null) + "", Debug.YELLOW);
 					if (tmp.next) {
 						tmp.next.prev = tmp.prev;
-					}
+					}/* else {
+						back = back.prev;
+					}*/
 					dispatchEvent(new LinkedListEvent(LinkedListEvent.ITEM_REMOVED, tmp.object));
 					return tmp.object;
 				}
 				tmp = tmp.next;
 			}
-			return x;
+			throw new Error("Cannot remove an element that is not in the list");
 		}
 		/**
 		     * Get the least recently inserted item in the queue.
@@ -128,13 +135,13 @@
 			dispatchEvent(new LinkedListEvent(LinkedListEvent.ITEM_REMOVED, null));
 		}
 		public override function toString():String {
-			var s:String = "[";
+			var s:String = "{";
 			var tmp:LinkedListNode = front;
 			while (tmp != null) {
 				s += tmp + " ";
 				tmp = tmp.next;
 			}
-			s += "]";
+			s += "}";
 			return s;
 		}
 		public function get iterator():LinkedListIterator {
