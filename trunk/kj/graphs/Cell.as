@@ -2,13 +2,14 @@
 
 	import kj.graphs.Node;
 	import kj.display.DraggableSprite;
-	import kj.collections.LinkedList;
-	import kj.events.LinkedListEvent;
 	import kj.events.NodeEvent;
-	import kj.collections.LinkedListIterator;
 	import flash.events.Event;
 
-
+	/**
+	 * Estende Node per fornire gli elementi per realizzare una Cella di un CA.
+	 * Molto da sistemare
+	 * @see Node
+	*/
 	public class Cell extends Node {
 
 		public var display:DraggableSprite;
@@ -16,10 +17,6 @@
 		public static const MOVED:String = "moved";
 		protected var archi:Array;
 
-		/*
-		se io muovo questa, ridisegno tutti gli archi che escono
-		se io muovo un vicino, ridisegno solo l'arco dal vinino a questa
-		*/
 		public function Cell(id:Object):void {
 			super(id);
 			archi = new Array();

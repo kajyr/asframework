@@ -30,10 +30,5 @@
 		public function get attached():Boolean { 
             return (this.parent != null); 
         } 
-		
-		public function move(xx:Number, yy:Number) {
-			x = xx;
-			y = yy;
-		}
 	}
 }

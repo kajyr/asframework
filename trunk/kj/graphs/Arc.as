@@ -1,13 +1,19 @@
 ﻿package kj.graphs {
 
 	/**
-	*	Classe Arco: contiene due nodi e il peso dell'arco
+	*	Unisce due nodi con un peso e un colore (opzionali)
 	*/
 	public class Arc {
 
 		private var _src:Node;
 		private var _dest:Node;
+		/**
+		 * Il peso dell'arco
+		 */
 		private var weight:Number;
+		/**
+		 * Il colore dell'arco
+		 */
 		public var color:uint;
 		
 		public function Arc(src:Node, dest:Node, weight:Number = 0, color:uint = 0x000000) {

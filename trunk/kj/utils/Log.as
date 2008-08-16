@@ -16,7 +16,7 @@
 		public static var cSharpLogFunction:String;
 		
 		
-		public static function log(id:String, message:String) {
+		public static function log(id:String, message:String):void {
 			message = "[" + id + "] " + message;
 			if (timestamp) {
 				var d:Date = new Date();

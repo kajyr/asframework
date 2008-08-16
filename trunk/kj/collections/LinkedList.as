@@ -2,7 +2,6 @@
 	
 	import flash.events.EventDispatcher;
 	import kj.events.LinkedListEvent;
-	import com.carlcalderon.arthropod.Debug;
 
 	public class LinkedList extends EventDispatcher {
 
