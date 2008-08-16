@@ -2,9 +2,10 @@
 	import kj.events.NodeEvent;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	
+
 	/**
-	 * L'elemento nodo di un grafo. 
+	 * L'elemento nodo di un grafo.
+	 * @see kj.events.NodeEvent
 	 */
 	public class Node extends EventDispatcher {
 
@@ -21,23 +22,25 @@
 		 * Non modificarlo manualmente.
 		 */
 		public var arcs:Array;
-		public static const UPDATED:String="updated";
-		
+
+		public static  const UPDATED:String="updated";
+
 		/**
 		 * @param id Un identificativo per il nodo.
 		 */
 		public function Node(id:Object) {
-			this.id = id;
-			arcs = new Array();
+			this.id=id;
+			arcs=new Array  ;
 		}
 		/**
 		 * Aggiunge un arco verso un altro nodo.
 		 * @param dest Il nodo di destinazione
 		 * @param weight Il peso dell'arco
 		 * @param color Il colore dell'arco
+		 * @see kj.events.NodeEvent
 		 */
-		public function addArc(dest:Node,weight:Number = 0,color:uint=0x000000):void {
-			arcs.push(new Arc(this, dest,weight,color));
+		public function addArc(dest:Node,weight:Number=0,color:uint=0x000000):void {
+			arcs.push(new Arc(this,dest,weight,color));
 			dispatchEvent(new NodeEvent(NodeEvent.ADDED_NEIGHBOUR,dest));
 		}
 		/**
@@ -45,6 +48,7 @@
 		 * <p>In caso di più archi rimuove il primo.</p>
 		 * @param dest Il nodo di destinazione
 		 * @return true se l'arco era presente ed è stato eliminato
+		 * @see kj.events.NodeEvent
 		 */
 		public function removeArc(dest:Node):Boolean {
 			for each (var arc:Arc in arcs) {
@@ -58,7 +62,7 @@
 		}
 		/**
 		 * Permette di ottenere un arco in uscita verso un altro nodo.
-		 * <p>Chiaramente l'arco deve esistere tra quelli in uscita dal nodo  chiamante.</p>
+		 * <p>Chiaramente l'arco deve esistere tra quelli in uscita dal nodo chiamante.</p>
 		 * @param dest Il nodo di destinazione
 		 * @return L'oggetto Arc che unisce il nodo chiamante con il nodo dest
 		 */
@@ -70,7 +74,10 @@
 			}
 			return null;
 		}
-		public override  function toString():String {
+		/**
+		 *  Prints out a string representing the current object.
+		 */
+		public override function toString():String {
 			return id.toString();
 		}
 	}

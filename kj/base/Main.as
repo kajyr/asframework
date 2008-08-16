@@ -5,9 +5,6 @@
 		
 		public static var istance:Main;
 		
-		
-		public static const PROVA:String = "ciao";
-		
 		public function Main():void {
 			istance = this;
 		}

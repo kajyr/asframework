@@ -4,8 +4,6 @@
 
 	public class DraggableMovieClip extends DetachableMovieClip implements IDraggable {
 
-		/*protected var container:MovieClip;
-		protected var attached:Boolean = false;*/
 		protected var draggable:Boolean = false;
 		public static const STOP_DRAG:String = "stopdrag";
 		public static const START_DRAG:String = "startdrag";
