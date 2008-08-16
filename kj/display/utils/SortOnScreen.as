@@ -28,7 +28,7 @@
 		}
 		
 		public static function orizontalLine(items:Array, start:Point, length:Number = -1):void {
-			var pos = start;
+			var pos:Point = start;
 			for each (var d:DisplayObject in items) {
 				d.x = pos.x;
 				d.y = pos.y;
@@ -41,7 +41,7 @@
 			}
 		}
 		public static function verticallLine(items:Array, start:Point, length:Number = -1):void {
-			var pos = start;
+			var pos:Point = start;
 			for each (var d:DisplayObject in items) {
 				d.x = pos.x;
 				d.y = pos.y;

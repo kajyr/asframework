@@ -1,6 +1,8 @@
-﻿package kj.graphs.algorithm {
+﻿package kj.graphs.algorithms {
 	
 	import kj.utils.StaticClass
 
-	public class GraphsAlgorithm extends StaticClass {}
+	public class GraphsAlgorithm extends StaticClass {
+	}
+}
 		
