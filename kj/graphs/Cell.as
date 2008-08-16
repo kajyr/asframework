@@ -44,16 +44,14 @@
 		}
 		private function onMoving(event:Event):void {
 			dispatchEvent(new NodeEvent(Cell.MOVING, this));
-			var li:LinkedListIterator = vicini.iterator;
-			while (li.hasNext()) {
-				unlink(li.next() as Cell);
+			for each (var arc:Arc in arcs) {
+				unlink(arc.destination as Cell);
 			}
 		}
 		private function onMoved(event:Event):void {
 			dispatchEvent(new NodeEvent(Cell.MOVED, this));
-			var li:LinkedListIterator = vicini.iterator;
-			while (li.hasNext()) {
-				link(li.next() as Cell);
+			for each (var arc:Arc in arcs) {
+				link(arc.destination as Cell);
 			}
 		}
 		private function onNeighbourMoving(event:NodeEvent):void {

@@ -7,15 +7,16 @@
 
 		private var _src:Node;
 		private var _dest:Node;
-		private var _weight:Number;
+		private var weight:Number;
+		public var color:uint;
 		
-		public function Arc(src:Node, dest:Node, weight:Number = 0) {
-			throw new Error("Use of the Arc class is deprecated");
+		public function Arc(src:Node, dest:Node, weight:Number = 0, color:uint = 0x000000) {
 			if (!src) throw new Error("Cannot create an arc from an empty Node");
 			if (!dest) throw new Error("Cannot create an arc to an empty Node");
 			_src = src;
 			_dest = dest;
-			_weight = weight;
+			this.weight = weight;
+			this.color = color;
 		}
 		
 		public function get source():Node {
@@ -24,14 +25,8 @@
 		public function get destination():Node {
 			return _dest;
 		}
-		public function get weight():Number {
-			return _weight;
-		}
-		public function toString():String {
-			return "(" + source + " -> " + destination + ")";
-		}
-		public function traceArc():void {
-			trace(this);
-		}
+/*		public function toString():String {
+			return "(" + _src + " -> " + _dest + ")";
+		}*/
 	}
 }
