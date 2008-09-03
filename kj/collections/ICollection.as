@@ -3,7 +3,7 @@
         /**
          * A 'java-style' collection interface.
          */
-        public interface Collection
+        public interface ICollection
         {
                 /**
                  * Determines if the collection contains a given item.

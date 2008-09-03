@@ -5,7 +5,7 @@
 	 * A Double linked LinkedList. Just in case..
 	 * @see kj.events.LinkedListEvent;
 	 */
-	public class LinkedList extends EventDispatcher implements Collection {
+	public class LinkedList extends EventDispatcher implements ICollection {
 
 		protected var front:LinkedListNode;
 		protected var back:LinkedListNode;
