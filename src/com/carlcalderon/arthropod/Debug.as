@@ -214,7 +214,7 @@ package com.carlcalderon.arthropod {
 		 * @param	value		Value to send
 		 * @param	color		opt. Color of the message
 		 */
-		private static function send( operation:String,value:*, prop:* ) {
+		private static function send( operation:String,value:*, prop:* ):Boolean {
 			if (!secure) 	lc.allowInsecureDomain('*');
 			else 			lc.allowDomain(secureDomain);
 			if (!hasEventListeners) {
@@ -226,10 +226,11 @@ package com.carlcalderon.arthropod {
 				try {
 					lc.send ( TYPE + '#' + DOMAIN + CHECK + ':' + CONNECTION , operation, SECURITY, value, prop ) ;
 					return true;
-				} catch (e) {
+				} catch (e:*) {
 					return false;
 				}
 			}
+			return true;
 		}
 		
 		/**

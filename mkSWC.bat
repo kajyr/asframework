@@ -1,0 +1,1 @@
+acompc -source-path src/ -include-sources src/ -output ASFramework.swc
