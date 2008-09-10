@@ -15,10 +15,14 @@
 		
 		public function SQLiteWrapper(db:File, onDBOpened:Function = null):void
 		{
-			conn = new SQLConnection();
-			if (onDBOpened != null) conn.addEventListener(SQLEvent.OPEN, onDBOpened);
-			conn.addEventListener(SQLErrorEvent.ERROR, onErr);
-			conn.openAsync(db);
+			try {
+				conn = new SQLConnection();
+				if (onDBOpened != null) conn.addEventListener(SQLEvent.OPEN, onDBOpened);
+				conn.addEventListener(SQLErrorEvent.ERROR, onErr);
+				conn.openAsync(db);
+			} catch (error:*) {
+				Debug.error("Open error: " + error);
+			}
 		}
 		private function onErr(event:SQLErrorEvent):void {
 			Debug.error("SQLite Error: " + event.error);
