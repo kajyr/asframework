@@ -1,4 +1,4 @@
-﻿package kj.graphs{
+﻿package kj.graphs{ 
 	import kj.events.NodeEvent;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -12,7 +12,7 @@
 		/**
 		 * L'identificativo del nodo.
 		 */
-		protected var id:Object;
+		public var data:Object;
 		/**
 		 * Il colore del nodo
 		 */
@@ -22,14 +22,17 @@
 		 * Non modificarlo manualmente.
 		 */
 		public var arcs:Array;
-
-		public static  const UPDATED:String="updated";
-
+		/**
+		 * Usata per tenere traccia delle visite durante gli algoritmi sui grafi
+		 */
+		public var marked:Boolean;
+		
+		public static const UPDATED:String="updated";
 		/**
 		 * @param id Un identificativo per il nodo.
 		 */
-		public function Node(id:Object) {
-			this.id=id;
+		public function Node(data:Object) {
+			this.data=data;
 			arcs=new Array  ;
 		}
 		/**
@@ -75,10 +78,15 @@
 			return null;
 		}
 		/**
+		 * Il numero degli arch uscenti
+		 */
+		public function get numArcs():uint { return arcs.length; }
+		
+		/**
 		 *  Prints out a string representing the current object.
 		 */
 		public override function toString():String {
-			return id.toString();
+			return data.toString();
 		}
 	}
 }
