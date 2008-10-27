@@ -1,5 +1,6 @@
 ﻿package kj.base {
 	import flash.display.MovieClip;
+	import flash.display.Stage;
 	
 	public class Main extends MovieClip {
 		
