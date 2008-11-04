@@ -16,6 +16,13 @@
 		public static function randNumber(n:Number = 1):int {
 			return Math.random() * n;
 		}
+		
+		/**
+			Returns a random color
+		*/
+		public static function randColor():uint {
+			return Math.random() * 0xFFFFFF;
+		}
     }
 }
 
