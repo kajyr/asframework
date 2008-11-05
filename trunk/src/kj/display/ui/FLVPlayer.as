@@ -19,7 +19,7 @@
 			scaleMode = VideoScaleMode.NO_SCALE;
 			fullScreenTakeOver = false; //stupid stupid property;
 			autoPlay = false; // i do autoPlay on attach! Much better
-			scaleMode = VideoScaleMode.NO_SCALE; // of course we don't want scaling! Who does?
+			//scaleMode = VideoScaleMode.NO_SCALE; // of course we don't want scaling! Who does?
 			this.source = source;
 			addEventListener(Event.ADDED_TO_STAGE, onAttach);
 			addEventListener(Event.REMOVED_FROM_STAGE, onDetach);
