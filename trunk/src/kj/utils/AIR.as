@@ -13,10 +13,10 @@
 		public static function get enabled():Boolean {
 			try {
 				var app:NativeApplication = NativeApplication.nativeApplication;
-				return true;
 			} catch (err:Error) {
 				return false;
 			}
+			return true;
 		}
 	}
 }
