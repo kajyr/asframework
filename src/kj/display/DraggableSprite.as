@@ -36,7 +36,7 @@
 		private function upHandler(event:MouseEvent):void {
 			stopDrag();
 			dragging = false;
-			//trace(this + " moved to (" + x + ", " + y + ")");
+			trace(this + " moved to (" + x + ", " + y + ")");
 			dispatchEvent(new Event(STOP_DRAG));
 		}
 		private function outHandler(event:MouseEvent):void {
