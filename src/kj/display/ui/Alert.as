@@ -2,6 +2,7 @@
 	
 	import kj.display.DetachableSprite;
 	import kj.utils.StaticClass;
+	import kj.base.Main;
 	
 	import flash.display.Stage;
 	import flash.text.TextField;
@@ -15,7 +16,7 @@
 		private static var currentAlert:DetachableSprite;
 		private static var actualStage:Stage;
 		
-		public function FullStageAlert():void {
+		public function Alert():void {
 			super();
 		}
 		
@@ -25,7 +26,8 @@
 		
 		public static function alert(message:String):void {
 			if (!actualStage) {
-				throw new Error("actual stage not registered. use register()");
+				if (Main.istance) actualStage = Main.istance.stage;
+				else throw new Error("actual stage not registered. use register()");
 			}
 			currentAlert = new DetachableSprite();
 			currentAlert.graphics.beginFill(0x000000, 0.7);
@@ -46,6 +48,7 @@
 			label.autoSize = TextFieldAutoSize.LEFT;
 			label.selectable = false;
 			label.text = text;
+			label.mouseEnabled = false;
 			return label;
 		}
 		
