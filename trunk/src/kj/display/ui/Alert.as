@@ -10,7 +10,7 @@
 	
 	import flash.events.MouseEvent;
 	
-	public class FullStageAlert extends StaticClass {
+	public class Alert extends StaticClass {
 		
 		private static var currentAlert:DetachableSprite;
 		private static var actualStage:Stage;
