@@ -9,7 +9,10 @@
 	import flash.text.TextFormat;
 	import flash.text.TextFieldAutoSize
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
 	
 	public class Alert extends StaticClass {
 		
@@ -24,7 +27,7 @@
 			actualStage = stage;
 		}
 		
-		public static function alert(message:String):void {
+		public static function alert(message:String, secondi:Number = -1):void {
 			if (!actualStage) {
 				if (Main.istance) actualStage = Main.istance.stage;
 				else throw new Error("actual stage not registered. use register()");
@@ -40,6 +43,12 @@
 			currentAlert.buttonMode = true;
 			currentAlert.addEventListener(MouseEvent.CLICK, onCAclick);
 			currentAlert.attach(actualStage);
+			if (secondi > 0) {
+				var t:Timer = new Timer(secondi * 1000, 1);
+				t.addEventListener(TimerEvent.TIMER, onCAclick);
+				t.start();
+			}
+			
 		}
 		
 		private static function getLabel(text:String, color:uint = 0xAAAAAA):TextField {
@@ -52,7 +61,7 @@
 			return label;
 		}
 		
-		private static function onCAclick(event:MouseEvent):void {
+		private static function onCAclick(event:Event):void {
 			if (currentAlert && currentAlert.parent) {
 				currentAlert.parent.removeChild(currentAlert);
 				currentAlert == null;
