@@ -42,7 +42,7 @@
 		}
 		/**
 			Fa ripartire il loop.
-			Non è possibile inserirla come lambda function perchè è necessario averne un ref per poi rimuoverle
+			Non è possibile inserirla come funzione anonima perchè è necessario averne un ref per poi rimuoverla
 		*/
 		private function loop(e:VideoEvent) {
 			play();
