@@ -31,6 +31,10 @@
 			}
 			stage.displayState = StageDisplayState.FULL_SCREEN;
 		}
+		
+		public function goNormalSize():void {
+			stage.displayState = StageDisplayState.NORMAL;
+		}
 	
 		public function get AIREnabled():Boolean {
 			try {
