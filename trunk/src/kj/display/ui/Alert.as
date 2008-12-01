@@ -18,6 +18,7 @@
 		
 		private static var currentAlert:DetachableSprite;
 		private static var actualStage:Stage;
+		private static var fullStage:Boolean = false;
 		
 		public function Alert():void {
 			super();
@@ -32,14 +33,22 @@
 				if (Main.istance) actualStage = Main.istance.stage;
 				else throw new Error("actual stage not registered. use register()");
 			}
+			
+			var label:TextField = getLabel(message)
+			
 			currentAlert = new DetachableSprite();
 			currentAlert.graphics.beginFill(0x000000, 0.7);
-			currentAlert.graphics.drawRect(0, 0, actualStage.stageWidth, actualStage.stageHeight);
+			if (fullStage) currentAlert.graphics.drawRect(0, 0, actualStage.stageWidth, actualStage.stageHeight);
+			else currentAlert.graphics.drawRoundRect(0, 0, label.width + 30, label.height + 10, 20);
 			currentAlert.graphics.endFill();
-			var label:TextField = getLabel(message)
-			label.x = actualStage.stageWidth /2 - label.width /2;
-			label.y = actualStage.stageHeight /2 - label.height /2;
 			currentAlert.addChild(label);
+			
+			// center label
+			label.x = currentAlert.width /2 - label.width /2;
+			label.y = currentAlert.height /2 - label.height /2;
+			currentAlert.x = actualStage.stageWidth /2 - currentAlert.width /2;
+			currentAlert.y = actualStage.stageHeight /2 - currentAlert.height /2;
+			
 			currentAlert.buttonMode = true;
 			currentAlert.addEventListener(MouseEvent.CLICK, onCAclick);
 			currentAlert.attach(actualStage);

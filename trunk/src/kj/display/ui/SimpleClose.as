@@ -55,7 +55,6 @@
 			
 		}
 		private function onMUp(event:MouseEvent):void {
-			;
 		}
 		private function onClick(event:MouseEvent):void {
 			
