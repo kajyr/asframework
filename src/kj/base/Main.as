@@ -12,10 +12,10 @@
 
 		public static  var istance:Main;
 
-		public function Main():void {
+		public function Main(scaleMode = StageScaleMode.EXACT_FIT):void {
 			istance = this;
 			stage.align = StageAlign.TOP_LEFT;
-			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.scaleMode = scaleMode;
 		}
 		/**
 		
