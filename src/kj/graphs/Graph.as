@@ -1,19 +1,28 @@
 ﻿package kj.graphs {
 	
+	import flash.events.EventDispatcher;
+	
 	import kj.collections.ICollection;
 	import kj.collections.IIterator;
+	import kj.events.GraphEvent;
+	
 	/**
 	 * A linked uni-directional weighted graph structure.
 	 * 
 	 * The Graph class manages all graph nodes. Each graph node has an array
 	 * of arcs, pointing to different nodes.
 	 */
-	public class Graph implements ICollection
+	public class Graph extends EventDispatcher implements ICollection
 	{
 		/**
 	 	 * The graph's nodes.
 	 	 */
-		public var nodes:Array;
+		public var nodes:Array;		/**
+		 * L'insieme degli archi uscenti da questo nodo.
+		 * Non modificarlo manualmente.
+		 */
+		public var arcs:Object;
+		
 		
 		private var _nodeCount:int;
 		
@@ -25,6 +34,7 @@
 		public function Graph()
 		{
 			nodes = new Array();
+			arcs=new Object;
 		}
 		
 		/**
@@ -48,7 +58,7 @@
 		 *              is visited. The visited node is accessible through
 		 *              the function's first argument. You can terminate the
 		 *              traversal by returning false in the callback function.
-		 */
+		 
 		public function depthFirst(node:Node, visit:Function):void
 		{
 			if (!node) return;
@@ -72,7 +82,7 @@
 					stack[c++] = arcs[i].node;
 			}
 		}
-		
+		*/
 		/**
 		 * Performs a breadth-first traversal starting at a given node.
 		 * 
@@ -94,7 +104,7 @@
 		 *              is visited. The visited node is accessible through
 		 *              the function's first argument. You can terminate the
 		 *              traversal by returning false in the callback function.
-		 */
+		 
 		public function breadthFirst(node:Node, visit:Function):void
 		{
 			if (!node) return;
@@ -133,7 +143,7 @@
 				c--;
 			}
 		}
-		
+		*/
 		/**
 		 * Adds a node at a given index to the graph.
 		 * 
@@ -145,6 +155,8 @@
 		public function addNode(node:Node):void
 		{
 			nodes.push(node);
+			arcs[node] = new Array();
+			dispatchEvent(new GraphEvent(GraphEvent.ADDED_NODE, node));
 		}
 		
 		/**
@@ -158,30 +170,71 @@
 		public function removeNode(node:Node, detach:Boolean = true):Node
 		{
 			nodes.splice(nodes.indexOf(node), 1);
-			
-			if (detach) {
-				for each(var n:Node in nodes) {
-					n.removeArc(node);
+			if (detach && arcs[node]) {
+				delete arcs[node];
+			}
+			dispatchEvent(new GraphEvent(GraphEvent.REMOVED_NODE, node));
+			return node;
+		}
+		/**
+		 * Aggiunge un arco verso un altro nodo.
+		 * Problema: bisognerebbe verificare che il secondo nodo sia nel grafo
+		 * @param dest Il nodo di destinazione
+		 * @param weight Il peso dell'arco
+		 * @param color Il colore dell'arco
+		 * @see kj.events.NodeEvent
+		 */
+		public function addArc(src:Node, dest:Node,weight:Number=0,color:uint=0x000000):void {
+			var a:Arc = new Arc(src,dest,weight,color);
+			arcs[src].push(a);
+			dispatchEvent(new GraphEvent(GraphEvent.ADDED_ARC, a));
+		}
+		/**
+		 * Rimuove un arco verso un altro nodo.
+		 * <p>In caso di più archi rimuove il primo.</p>
+		 * @param dest Il nodo di destinazione
+		 * @return true se l'arco era presente ed è stato eliminato
+		 * @see kj.events.GraphEvent
+		 */
+		public function removeArc(src:Node, dest:Node):Boolean {
+			if (!arcs[src]) return false;
+			for each (var arc:Arc in arcs[src]) {
+				if (arc.destination == dest) {
+					arcs.splice(arcs.indexOf(arc),1);
+					dispatchEvent(new GraphEvent(GraphEvent.REMOVED_ARC, arc));
+					return true;
 				}
 			}
-			
-			return node;
-			
-			if (!node) return false;
+			return false;
+		}
+		/**
+		 * Permette di ottenere un arco in uscita verso un altro nodo.
+		 * <p>Chiaramente l'arco deve esistere tra quelli in uscita dal nodo chiamante.</p>
+		 * @param src Il nodo sorgente
+		 * @param dest Il nodo di destinazione
+		 * @return L'oggetto Arc che unisce il nodo chiamante con il nodo dest
+		 */
+		public function getArc(src:Node, dest:Node):Arc {
+			for each (var arc:Arc in arcs[src]) {
+				if (arc.destination == dest) {
+					return arc;
+				}
+			}
+			return null;
 		}
 		
 		/**
 		 * Marks are used to keep track of the nodes that have been visited
 		 * during a depth-first or breadth-first traversal. You must call this
 		 * method to clear all markers before starting a new traversal.
-		 */
+		 
 		private function clearMarks():void
 		{
 			for each(var node:Node in nodes) {
 				node.marked = false;
 			}
 		}
-		
+		*/
 		/**
 		 * @inheritDoc
 		 */		
@@ -235,6 +288,16 @@
 				a.push(node);
 			}
 			return a;
+		}
+		/**
+		 *  Prints out a string representing the current object.
+		 */
+		public override function toString():String {
+			var out:String = "[" + nodes.toString() + "]\n";
+			for each(var a:Array in arcs) {
+				out += a + "\n";	
+			}
+			return out;
 		}
 	}
 }
