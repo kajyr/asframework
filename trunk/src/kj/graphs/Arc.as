@@ -31,8 +31,8 @@
 		public function get destination():Node {
 			return _dest;
 		}
-/*		public function toString():String {
-			return "(" + _src + " -> " + _dest + ")";
-		}*/
+		public function toString():String {
+			return "[" + _src + " -> " + _dest + "]";
+		}
 	}
 }
