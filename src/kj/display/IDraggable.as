@@ -1,8 +1,8 @@
 ﻿package kj.display {
-	import flash.events.MouseEvent;
+	import flash.geom.Rectangle;
 
 	public interface IDraggable  {
-		function enableDrag():void;
+		function enableDrag(bounds:Rectangle = null):void;
 		function disableDrag():void;
 	}
 }

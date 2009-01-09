@@ -1,6 +1,6 @@
 ﻿/**
 * Debug
-* Designed for version 0.81 to 0.96.7 of the Arthropod Debugger.
+* Designed for version 0.96.7 to 1.0 of the Arthropod Debugger.
 * 
 * USE AT YOUR OWN RISK!
 * Any trace that is made with arthropod may be viewed by others.
@@ -15,15 +15,18 @@
 * Lee Brimelow - www.theflashblog.com 
 * 
 * @author Carl Calderon 2008
-* @version 0.73
+* @version 0.74
 * @link http.//www.carlcalderon.com/
-* @since 0.61
+* @since 0.72
 */
 
 package com.carlcalderon.arthropod {
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.DisplayObject;
+	import flash.display.IBitmapDrawable;
+	import flash.display.Stage;
 	import flash.events.StatusEvent;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
@@ -37,7 +40,17 @@ package com.carlcalderon.arthropod {
 		 * Version control
 		 */
 		public static const NAME		:String = 'Debug';
-		public static const VERSION		:String = '0.72';
+		public static const VERSION		:String = '0.74';
+		
+		/**
+		 * Privacy
+		 * By setting this password, you need to enter the
+		 * same in "Arthropod -> Settings -> Connection Password"
+		 * to be able to see the traces.
+		 * 
+		 * default: 'CDC309AF';
+		 */
+		public static var password		:String = 'CDC309AF';
 		
 		/**
 		 * Predefined colors
@@ -79,7 +92,6 @@ package com.carlcalderon.arthropod {
 		private static const CHECK			:String = '.161E714B6C1A76DE7B9865F88B32FCCE8FABA7B5.1';
 		private static const TYPE			:String = 'app';
 		private static const CONNECTION		:String = 'arthropod';
-		private static const SECURITY		:String = 'CDC309AF';
 		
 		private static const LOG_OPERATION		:String = 'debug';
 		private static const ERROR_OPERATION	:String = 'debugError';
@@ -100,8 +112,8 @@ package com.carlcalderon.arthropod {
 		 * @param	color		opt. Color of the message
 		 * @return				True if successful
 		 */
-		public static function log(message:String,color:uint=0xFEFEFE) :Boolean {
-			return send ( LOG_OPERATION, message, color );
+		public static function log ( message:*, color:uint = 0xFEFEFE ) :Boolean {
+			return send ( LOG_OPERATION, String ( message ) , color ) ;
 		}
 		
 		/**
@@ -111,8 +123,8 @@ package com.carlcalderon.arthropod {
 		 * @param	message		Message to be traced
 		 * @return				True if successful
 		 */
-		public static function error(message:String) :Boolean {
-			return send ( ERROR_OPERATION, message, 0xCC0000 );
+		public static function error ( message:* ) :Boolean {
+			return send ( ERROR_OPERATION, String ( message ) , 0xCC0000 ) ;
 		}
 		
 		/**
@@ -122,8 +134,8 @@ package com.carlcalderon.arthropod {
 		 * @param	message		Message to be traced
 		 * @return				True if successful
 		 */
-		public static function warning(message:String) :Boolean {
-			return send ( WARNING_OPERATION, message, 0xCCCC00 );
+		public static function warning ( message:* ) :Boolean {
+			return send ( WARNING_OPERATION, String ( message ) , 0xCCCC00 ) ;
 		}
 		
 		/**
@@ -161,19 +173,31 @@ package com.carlcalderon.arthropod {
 		 * 40Kb. The bitmap method converts the specified
 		 * BitmapData to an acceptable size for the call.
 		 * 
-		 * @param	bmd			BitmapData to be traced as
-		 * 						a thumbnail
+		 * @param	bmd			Any IBitmapDrawable
+		 * @param	label		Label
 		 * @return				True if successful
 		 */
-		public static function bitmap ( bmd:BitmapData ) :Boolean {
+		public static function bitmap ( bmd:*, label:String = null ) :Boolean {
 			var bm:BitmapData = new BitmapData ( 100, 100, true, 0x00FFFFFF ) ;
 			var mtx:Matrix = new Matrix ( ) ;
 			var s:Number = 100 / (( bmd.width >= bmd.height ) ? bmd.width : bmd.height ) ;
 			mtx.scale ( s, s ) ;
 			bm.draw ( bmd, mtx,null,null,null,true ) ;
-			var bounds:Rectangle = new Rectangle ( 0, 0, Math.floor(bmd.width*s), Math.floor(bmd.height*s) ) ;
-			var ba:ByteArray = bm.getPixels ( bounds ) ;
-			return send ( BITMAP_OPERATION, ba, bounds ) ;
+			var bounds:Rectangle = new Rectangle ( 0, 0, Math.floor ( bmd.width * s ) , Math.floor ( bmd.height * s ) ) ;
+			return send ( BITMAP_OPERATION, bm.getPixels ( bounds ), { bounds:bounds, lbl:label } ) ;
+		}
+		
+		/**
+		 * Traces a snapshot of the current stage state.
+		 * 
+		 * @param	stage		Stage
+		 * @param	label		Label
+		 * @return				True if successful
+		 */
+		public static function snapshot ( stage:Stage, label:String=null ) :Boolean {
+			if ( stage )
+				return bitmap ( stage, label ) ;
+			return false;
 		}
 		
 		/**
@@ -191,7 +215,7 @@ package com.carlcalderon.arthropod {
 		 * @param	obj			Object to be traced
 		 * @return				True if successful
 		 */
-		public static function object ( obj:*) :Boolean {
+		public static function object ( obj:* ) :Boolean {
 			return send ( OBJECT_OPERATION, obj, null ) ;
 		}
 		
@@ -214,7 +238,7 @@ package com.carlcalderon.arthropod {
 		 * @param	value		Value to send
 		 * @param	color		opt. Color of the message
 		 */
-		private static function send( operation:String,value:*, prop:* ):Boolean {
+		private static function send( operation:String, value:*, prop:* ):Boolean {
 			if (!secure) 	lc.allowInsecureDomain('*');
 			else 			lc.allowDomain(secureDomain);
 			if (!hasEventListeners) {
@@ -224,13 +248,13 @@ package com.carlcalderon.arthropod {
 			}
 			if(allowLog){
 				try {
-					lc.send ( TYPE + '#' + DOMAIN + CHECK + ':' + CONNECTION , operation, SECURITY, value, prop ) ;
+					lc.send ( TYPE + '#' + DOMAIN + CHECK + ':' + CONNECTION , operation, password, value, prop ) ;
 					return true;
 				} catch (e:*) {
 					return false;
 				}
 			}
-			return true;
+			return false;
 		}
 		
 		/**
