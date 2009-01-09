@@ -23,6 +23,10 @@
 		public static function randColor():uint {
 			return Math.random() * 0xFFFFFF;
 		}
+		
+		public static function bool():Boolean {
+			return (Math.round(Math.random()) == 0);
+		}
     }
 }
 
