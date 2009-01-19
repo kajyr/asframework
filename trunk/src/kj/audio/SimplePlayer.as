@@ -1,6 +1,7 @@
 ﻿package kj.audio {
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
+	import flash.media.SoundTransform;
 	import flash.net.URLRequest;
 	import flash.events.IOErrorEvent;	
 	import kj.display.ui.Alert;
@@ -31,6 +32,15 @@
 		
 		public static function seek():void {
 			
+		}
+		
+		public static function toggleVolume():void {
+			if (channel) {
+				var transform:SoundTransform = channel.soundTransform;
+            	transform.volume = Math.abs(transform.volume - 1);
+           		channel.soundTransform = transform;
+
+			}
 		}
 	}
 }
