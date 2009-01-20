@@ -4,6 +4,8 @@
 	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
 	import flash.geom.Rectangle;
+	
+	import kj.utils.AIR;
 
 	//import kj.utils.AIR;
 
@@ -25,7 +27,7 @@
 		*/
 		public function goFullScreen(hwRect:Rectangle = null):void {
 
-			if (hwRect && AIREnabled) {
+			if (hwRect && AIR.enabled) {
 				stage["fullScreenSourceRect"] = hwRect;
 			}
 			stage.displayState = StageDisplayState.FULL_SCREEN;
@@ -33,15 +35,6 @@
 		
 		public function goNormalSize():void {
 			stage.displayState = StageDisplayState.NORMAL;
-		}
-	
-		public function get AIREnabled():Boolean {
-			try {
-				var tmp:Object = stage["fullScreenSourceRect"];
-			} catch (e:Error) {
-				return false;
-			}
-			return true;
 		}
 	}
 }
