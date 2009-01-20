@@ -6,7 +6,7 @@
 	public class Cross extends Shape {
 		public static var size:Number = 10;
 		
-		function Cross(x, y):void {
+		function Cross(x:Number, y:Number):void {
 			graphics.lineStyle(2, Random.randColor());
 			graphics.moveTo(x, y - size);
 			graphics.lineTo(x, y + size);
