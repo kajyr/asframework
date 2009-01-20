@@ -72,13 +72,13 @@
 					var distFromLeft:Number = x;
 					var distFromBottom:Number = Main.istance.stage.stageHeight - (y + height);
 					if (distFromTop <= distFromRight && distFromTop <= distFromLeft && distFromTop <= distFromBottom) {
-						Debug.log("Nearest is top");
+						//Debug.log("Nearest is top");
 					} else if (distFromBottom <= distFromRight && distFromBottom <= distFromLeft && distFromBottom <= distFromTop) {
-						Debug.log("Nearest is bottom");
+						//Debug.log("Nearest is bottom");
 					} else if (distFromRight <= distFromTop && distFromRight <= distFromLeft && distFromRight <= distFromBottom) {
-						Debug.log("Nearest is right");
+						//Debug.log("Nearest is right");
 					} else if (distFromLeft <= distFromRight && distFromLeft <= distFromTop && distFromLeft <= distFromBottom) {
-						Debug.log("Nearest is left");
+						//Debug.log("Nearest is left");
 					}
 				/*	1) mandarlo fuori stage (dal lato giusto)
 					tweenOut();

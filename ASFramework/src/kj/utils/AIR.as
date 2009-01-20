@@ -1,5 +1,7 @@
 ﻿package kj.utils {
-	import flash.desktop.NativeApplication;
+	import kj.base.Main;
+	
+	//import flash.desktop.NativeApplication;
 	/**
 	     * Used to check basic stuff abount Adobe AIR
 	     * @author kajyr
@@ -12,8 +14,8 @@
 		 */
 		public static function get enabled():Boolean {
 			try {
-				var app:NativeApplication = NativeApplication.nativeApplication;
-			} catch (err:Error) {
+				var tmp:Object = Main.istance.stage["fullScreenSourceRect"];
+			} catch (e:Error) {
 				return false;
 			}
 			return true;
