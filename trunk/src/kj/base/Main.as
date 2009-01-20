@@ -1,9 +1,8 @@
 ﻿package kj.base{
 	import flash.display.MovieClip;
-	import flash.display.Stage;
+	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
-	import flash.display.StageAlign;
 	import flash.geom.Rectangle;
 
 	//import kj.utils.AIR;
@@ -12,7 +11,7 @@
 
 		public static  var istance:Main;
 
-		public function Main(scaleMode = StageScaleMode.EXACT_FIT):void {
+		public function Main(scaleMode:String = StageScaleMode.EXACT_FIT):void {
 			istance = this;
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = scaleMode;
