@@ -26,7 +26,7 @@
 		/**
 		 * @param id Un identificativo per il nodo.
 		 */
-		public function Node(data:Object) {
+		public function Node(data:Object = "") {
 			this.data=data;
 		}
 		
