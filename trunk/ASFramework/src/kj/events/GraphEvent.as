@@ -1,6 +1,5 @@
 package kj.events
 {
-	//import kj.graphs.Node;
 
 	public class GraphEvent extends EventContainer
 	{
