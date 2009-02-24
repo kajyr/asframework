@@ -7,12 +7,12 @@ package kj.display.debug
 
 	public class DRectangle extends Shape
 	{
-		public function DRectangle(rectangle:Rectangle)
+		public function DRectangle(rectangle:Rectangle, color:uint = 0x123456)
 		{
 			super();
-			var color:uint = Random.randColor();
+			if (color == 0x123456) color = Random.randColor();
 			graphics.lineStyle(2, color);
-			graphics.beginFill(color, 0.2);
+			graphics.beginFill(color, 0.3);
 			graphics.drawRect(rectangle.x, rectangle.y,rectangle.width,rectangle.height);
 			graphics.endFill();
 		}
