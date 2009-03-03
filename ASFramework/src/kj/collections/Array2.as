@@ -3,7 +3,7 @@
 	import kj.collections.ICollection;
 	
 	import com.carlcalderon.arthropod.Debug;
-		
+		//bubu
 	public class Array2 extends Array implements ICollection
 	{
 		private var _width:uint;
