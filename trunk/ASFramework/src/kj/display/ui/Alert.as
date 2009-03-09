@@ -32,11 +32,10 @@
 		public static function alert(message:String, secondi:Number = -1):void {
 			if (!actualStage) {
 				if (Main.istance) actualStage = Main.istance.stage;
-				else throw new Error("actual stage not registered. use register()");
+				else throw new Error("actual stage not found. use register()");
 			}
 			
 			var label:TextField = getLabel(message)
-			
 			currentAlert = new DetachableSprite();
 			currentAlert.graphics.beginFill(0x000000, 0.7);
 			if (fullStage) currentAlert.graphics.drawRect(0, 0, actualStage.stageWidth, actualStage.stageHeight);
@@ -45,12 +44,11 @@
 			currentAlert.addChild(label);
 			
 			// center label
-			
 			label.x = currentAlert.width /2 - label.width /2;
 			label.y = currentAlert.height /2 - label.height /2;
 			if (actualStage.displayState == StageDisplayState.FULL_SCREEN) {
-				currentAlert.x = 1024 /2 - currentAlert.width /2;
-				currentAlert.y = 768 /2 - currentAlert.height /2;
+				currentAlert.x = actualStage.fullScreenWidth /2 - currentAlert.width /2;
+				currentAlert.y = actualStage.fullScreenHeight /2 - currentAlert.height /2;
 			} else {
 				currentAlert.x = actualStage.stageWidth /2 - currentAlert.width /2;
 				currentAlert.y = actualStage.stageHeight /2 - currentAlert.height /2;
@@ -65,7 +63,6 @@
 				t.start();
 				currentAlert.mouseEnabled = false;
 			}
-			
 		}
 		
 		private static function getLabel(text:String, color:uint = 0xAAAAAA):TextField {

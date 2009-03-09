@@ -25,12 +25,15 @@
 		goFullScreen(new Rectangle(0,0,1024,768));
 		
 		*/
-		public function goFullScreen(hwRect:Rectangle = null):void {
-
-			if (hwRect && AIR.enabled) {
-				stage["fullScreenSourceRect"] = hwRect;
+		public function set fullScreen(value:Boolean):void {
+			if (value) {
+				if (AIR.enabled) {
+					stage["fullScreenSourceRect"] = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
+				}
+				stage.displayState = StageDisplayState.FULL_SCREEN;
+			} else {
+				stage.displayState = StageDisplayState.NORMAL;
 			}
-			stage.displayState = StageDisplayState.FULL_SCREEN;
 		}
 		
 		public function goNormalSize():void {
