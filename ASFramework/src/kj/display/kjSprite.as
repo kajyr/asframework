@@ -1,24 +1,44 @@
 ﻿package kj.display {
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 
-	public class DraggableSprite extends DetachableSprite implements IDraggable {
+	public class kjSprite extends Sprite implements IDetachable, IDraggable {
 
-		/*protected var container:MovieClip;*/
 		protected var dragging:Boolean = false;
 		protected var draggable:Boolean = false;
 		public static const START_DRAG:String = "start_drag";
 		public static const STOP_DRAG:String = "stop_drag";
 		public static const SLIPPED_DRAG:String = "slipped_drag";
 		private var bounds:Rectangle = null;
-
-		public function enableDrag(bounds:Rectangle = null):void {
+		
+		public function detach():void {
+			if (parent && attached) {
+				parent.removeChild(this);
+			}
+		}
+		
+		public function get attached():Boolean { 
+            return (this.parent != null); 
+        }
+        
+        public function position(x:Number, y:Number):void {
+        	this.x = x;
+        	this.y = y;
+        }
+        
+        /**
+         *
+         * @todo upHandler dovrebbe essere attacato al padre, però poi c'è il problema dei refernce. Usare weak? 
+         * @param bounds
+         * 
+         */
+        public function enableDrag(bounds:Rectangle = null):void {
 			if (!draggable) {
 				this.bounds = bounds;
 				addEventListener(MouseEvent.MOUSE_DOWN, downHandler);
 				addEventListener(MouseEvent.MOUSE_UP, upHandler);
-				addEventListener(MouseEvent.MOUSE_OUT, outHandler);
 				draggable = true;
 			}
 		}
@@ -40,15 +60,7 @@
 		private function upHandler(event:MouseEvent):void {
 			stopDrag();
 			dragging = false;
-			//trace(this + " moved to (" + x + ", " + y + ")");
 			dispatchEvent(new Event(STOP_DRAG));
 		}
-		private function outHandler(event:MouseEvent):void {
-			if (dragging) {
-				//stopDrag();
-				dispatchEvent(new Event(SLIPPED_DRAG));
-			}
-		}
-		
 	}
 }

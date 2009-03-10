@@ -3,10 +3,8 @@
 	
 	public interface IDetachable
 	{
-		function get attached() : Boolean
-		function attach(p:DisplayObjectContainer) : void
-		function attachAt(p:DisplayObjectContainer, index:int) : void
-		function detach() : void
+		function get attached() : Boolean;
+		function detach() : void;
 	}
 	
 }
