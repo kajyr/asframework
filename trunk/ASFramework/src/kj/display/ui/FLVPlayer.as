@@ -26,8 +26,10 @@
 		}
 		
 		/**
-			Loop the video (once it is finished, restarts.)
-		*/
+		 * Loop the video (once it is finished, restarts.)
+		 * @return if the loop is enabled.
+		 * 
+		 */
 		public function get doLoop():Boolean {
 			return _loop;
 		}
@@ -44,7 +46,7 @@
 			Fa ripartire il loop.
 			Non è possibile inserirla come funzione anonima perchè è necessario averne un ref per poi rimuoverla
 		*/
-		private function loop(e:VideoEvent) {
+		private function loop(e:VideoEvent):void {
 			play();
 		}
 		

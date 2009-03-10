@@ -1,12 +1,12 @@
 ﻿package kj.display.ui {
-	import flash.display.Sprite;
-	import kj.display.DraggableSprite;
-	import kj.base.Main;
-	import kj.display.utils.Align;
 	import flash.display.DisplayObject;
-	import com.carlcalderon.arthropod.Debug;
+	import flash.display.Sprite;
 	
-	public class Toolbar extends DraggableSprite {
+	import kj.base.Main;
+	import kj.display.kjSprite;
+	import kj.display.utils.Align;
+	
+	public class Toolbar extends kjSprite {
 		public static const PADDING:Number = 10;
 		
 		private var posX:Number = PADDING;
@@ -28,7 +28,7 @@
 			Imposta la posizione;
 			@see kj.display.utils.Align;
 		*/
-		public function set position(value:uint):void {
+		public function set displacement(value:uint):void {
 			_position = value;
 			rePosition();
 		}
@@ -54,14 +54,11 @@
 		}
 		private function rePosition():void {
 			if (_position == Align.TOP_LEFT) {
-				x = PADDING;
-				y = PADDING;
+				position(PADDING, PADDING);
 			} else if (_position == Align.TOP_RIGHT) {
-				x = Main.istance.stage.stageWidth - width - PADDING;
-				y = PADDING;
+				position(Main.istance.stage.stageWidth - width - PADDING, PADDING);
 			} else if (_position == Align.BOTTOM_RIGHT) {
-				x = Main.istance.stage.stageWidth - width - PADDING;
-				y = Main.istance.stage.stageHeight - height - PADDING;
+				position(Main.istance.stage.stageWidth - width - PADDING, Main.istance.stage.stageHeight - height - PADDING);
 			}
 		}
 		public function set autoHide(value:Boolean):void {
@@ -93,12 +90,12 @@
 			}
 		}
 		
-		private function get placeholder():Sprite {
+		/* private function get placeholder():Sprite {
 			var p:Sprite = new Sprite();
 			p.graphics.beginFill(0, 1);
 			p.graphics.drawRect(0, 0, width, height);
 			p.graphics.endFill();
 			return p;
-		}
+		} */
 	}
 }
