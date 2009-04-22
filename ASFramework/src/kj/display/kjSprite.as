@@ -30,7 +30,7 @@
         
         /**
          *
-         * @todo upHandler dovrebbe essere attacato al padre, però poi c'è il problema dei refernce. Usare weak? 
+         * @todo upHandler dovrebbe essere attacato al padre o allo stage, però poi c'è il problema dei refernce. Usare weak? 
          * @param bounds
          * 
          */

@@ -2,6 +2,7 @@
 	import fl.video.FLVPlayback;
 	import fl.video.VideoEvent;
 	import fl.video.VideoScaleMode;
+	
 	import flash.events.Event;
 	
 	/** 
