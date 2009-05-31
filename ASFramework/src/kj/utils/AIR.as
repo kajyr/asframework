@@ -3,7 +3,7 @@
 	
 	//import flash.desktop.NativeApplication;
 	/**
-	     * Used to check basic stuff abount Adobe AIR
+	     * Used to check basic stuff about Adobe AIR
 	     * @author kajyr
 	     * 
 	     */
