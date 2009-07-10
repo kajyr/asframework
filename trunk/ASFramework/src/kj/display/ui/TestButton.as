@@ -16,7 +16,7 @@
 		*/
 		public function TestButton(w:Number = 150, h:Number = 50):void {
 			super();
-			graphics.beginFill(Random.randColor());
+			graphics.beginFill(Random.color());
 			graphics.drawRect(0, 0, w, h);
 			graphics.endFill();
 			filters = new Array( new DropShadowFilter(2));

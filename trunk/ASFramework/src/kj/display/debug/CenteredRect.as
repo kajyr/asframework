@@ -9,7 +9,7 @@
 		public static var size:Number = 10;
 		
 		function CenteredRect(center:Point, halfWidth:Number, halfHeight:Number):void {
-			var color:uint = Random.randColor();
+			var color:uint = Random.color();
 			graphics.lineStyle(2, color);
 			graphics.beginFill(color, 0.5);
 			graphics.drawRect(center.x - halfWidth, center.y - halfHeight, 2*halfWidth, 2*halfHeight);

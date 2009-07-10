@@ -7,7 +7,7 @@
 		public static var size:Number = 10;
 		
 		function Cross(x:Number, y:Number):void {
-			graphics.lineStyle(2, Random.randColor());
+			graphics.lineStyle(2, Random.color());
 			graphics.moveTo(x, y - size);
 			graphics.lineTo(x, y + size);
 			graphics.moveTo(x - size, y);
