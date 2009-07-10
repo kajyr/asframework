@@ -6,7 +6,7 @@
 	import kj.display.kjSprite;
 	import kj.display.utils.Align;
 	
-	public class Toolbar extends kjSprite implements IToolBar {
+	public class Toolbar extends kjSprite /*implements IToolBar */{
 		public static const PADDING:Number = 10;
 		
 		private var posX:Number = PADDING;

@@ -1,15 +1,13 @@
 ﻿package kj.display.ui  {
 	import flash.display.Sprite;
-	import kj.utils.Random;
 	import flash.events.MouseEvent;
 	import flash.filters.DropShadowFilter;
-	import flash.media.Sound;
-    import flash.media.SoundChannel;
-    import flash.net.URLRequest;
+	
+	import kj.utils.Random;
 	/**
 		Classe base per ogni bottone
 	*/
-	public class TestButton extends Sprite {
+	public class TestButton extends Sprite implements IButton {
 		
 		/**
 			Costruttore
