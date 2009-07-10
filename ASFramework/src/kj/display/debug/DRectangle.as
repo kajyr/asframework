@@ -10,7 +10,7 @@ package kj.display.debug
 		public function DRectangle(rectangle:Rectangle, color:uint = 0x123456)
 		{
 			super();
-			if (color == 0x123456) color = Random.randColor();
+			if (color == 0x123456) color = Random.color();
 			graphics.lineStyle(2, color);
 			graphics.beginFill(color, 0.3);
 			graphics.drawRect(rectangle.x, rectangle.y,rectangle.width,rectangle.height);
