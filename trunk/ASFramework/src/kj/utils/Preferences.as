@@ -36,8 +36,10 @@
          * @param prefName the name of the preference.
          * @return the value of the prefName preference.
          */
-        public static function get(prefName:String):String {
-            return root.child(prefName).text();
+        public static function get(prefName:String, fallbackValue:Object = null):String {
+        	var r:String = root.child(prefName).text();
+        	if (r) return r;
+            return fallbackValue.toString();
         }
         
         /**
