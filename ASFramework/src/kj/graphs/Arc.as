@@ -5,33 +5,34 @@
 	*/
 	public class Arc {
 
-		private var _src:Node;
-		private var _dest:Node;
+		private var _src:INode;
+		private var _dest:INode;
 		/**
 		 * Il peso dell'arco
 		 */
-		private var weight:Number;
+		public var weight:Number;
 		/**
 		 * Il colore dell'arco
 		 */
 		public var color:uint;
 		
-		public function Arc(src:Node, dest:Node, weight:Number = 0, color:uint = 0x000000) {
-			if (!src) throw new Error("Cannot create an arc from an empty Node");
-			if (!dest) throw new Error("Cannot create an arc to an empty Node");
+		public function Arc(src:INode, dest:INode, weight:Number = 0, color:uint = 0) {
+			if (!src) throw new Error("Cannot create an arc from an empty INode");
+			if (!dest) throw new Error("Cannot create an arc to an empty INode");
 			_src = src;
 			_dest = dest;
 			this.weight = weight;
 			this.color = color;
 		}
 		
-		public function get source():Node {
+		public function get source():INode {
 			return _src;
 		}
-		public function get destination():Node {
+		public function get destination():INode {
 			return _dest;
 		}
 		public function toString():String {
+			//return destination + "";
 			return "[" + _src + " -> " + _dest + "]";
 		}
 	}

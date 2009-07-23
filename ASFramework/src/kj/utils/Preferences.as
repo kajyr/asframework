@@ -34,7 +34,9 @@
 		/**
          * The get method returns the value for a specific preference.
          * @param prefName the name of the preference.
-         * @return the value of the prefName preference.
+         * @param def the default value in case the preference for prefName has not been set. Note that it will be casted as string
+         * @return the value of the prefName preference or def.
+         * 
          */
         public static function get(prefName:String, fallbackValue:Object = null):String {
         	var r:String = root.child(prefName).text();
