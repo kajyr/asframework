@@ -152,11 +152,12 @@
 		 * 
 		 * @return True if a node was added, otherwise false.
 		 */
-		public function addNode(node:INode):void
+		public function addNode(node:INode):INode
 		{
 			nodes.push(node);
 			arcs[node] = new Array();
 			dispatchEvent(new GraphEvent(GraphEvent.ADDED_NODE, node));
+			return node;
 		}
 		
 		/**

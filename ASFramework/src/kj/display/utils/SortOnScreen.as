@@ -1,30 +1,28 @@
 ﻿package kj.display.utils {
 	
-	import kj.utils.StaticClass
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
+	
+	import kj.graphs.Graph;
+	import kj.utils.StaticClass;
 
 	public class SortOnScreen extends StaticClass {
 		
-		/*
-		
-		Malemalemale dovrei usare LinkedList
-		
-		*/
-		public static function circle(items:Array, center:Point, distance:Number = -1, initialAngle:Number = 0):void {
-			var step:Number = (2* Math.PI) / items.length;
-			if (distance < 0) distance = 20 * items.length; // teorema di pitagora..
-			
+		public static function circle(items:Array, center:Point, distance:Number = -1, initialAngle:Number = 0, orientation:Number = 1):void {
+			var step:Number = ((2* Math.PI) / items.length) * (orientation / Math.abs(orientation)); // orientation è il verso
 			var angle:Number = initialAngle;
-
 			for each (var d:DisplayObject in items) {
-				//var distance:Number = d.height / Math.sin(angle);
+				if (distance < 0) distance = d.height+10 / Math.sin(step);
 				d.x = center.x + distance * Math.cos(angle);
 				d.y = center.y + distance * Math.sin(angle);
 				angle += step;
 			}
+		}
+		
+		public static function circularGraph(items:Graph, center:Point):void {
+			//serve una bfs per avere i nodi nell'ordine giusto
 		}
 		
 		public static function orizontalLine(items:Array, start:Point, length:Number = -1):void {
