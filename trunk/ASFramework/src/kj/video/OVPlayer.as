@@ -19,6 +19,7 @@
 		
 		public var path:String;
 		public var autoPlay:Boolean = false;
+		public var loop:Boolean = false;
 		
 		public function OVPlayer (path:String):void {
 			super();
@@ -44,8 +45,7 @@
 			stream.pause();
 		}
 		public function stop():void {
-			stream.close();
-			needReload = true;
+			stream.dispatchEvent(new OvpEvent(OvpEvent.COMPLETE));
 		}
 		
 		protected function onAttach(e:Event):void {
@@ -54,6 +54,7 @@
 		protected  function onDetach(e:Event):void {
 			stream.close();
 			stream.removeEventListener(OvpEvent.PROGRESS, progressHandler);
+			stream.addEventListener(OvpEvent.COMPLETE, completeHandler);
 			if (seekBarOver && seekBarOver.parent) seekBarOver.parent.removeChild(seekBarOver);
 		}
 		
@@ -81,6 +82,15 @@
 			stream.play(path);
 			needReload = false;
 			stream.pause();
+		}
+		
+		private function completeHandler(e:OvpEvent):void {
+			if (loop) {
+				stream.seek(0);
+			} else {
+				stream.close();
+				needReload = true;
+			}
 		}
 		
 		private function streamLengthHandler(e:OvpEvent):void {
