@@ -54,7 +54,6 @@
 		protected  function onDetach(e:Event):void {
 			stream.close();
 			stream.removeEventListener(OvpEvent.PROGRESS, progressHandler);
-			stream.addEventListener(OvpEvent.COMPLETE, completeHandler);
 			if (seekBarOver && seekBarOver.parent) seekBarOver.parent.removeChild(seekBarOver);
 		}
 		
@@ -78,6 +77,7 @@
 		private function connectedHandler(conn:OvpConnection):void {
 			stream = new OvpNetStream(conn);
 			stream.addEventListener(OvpEvent.STREAM_LENGTH, streamLengthHandler);
+			stream.addEventListener(OvpEvent.COMPLETE, completeHandler);
 			attachNetStream(stream);
 			stream.play(path);
 			needReload = false;
