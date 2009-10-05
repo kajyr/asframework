@@ -9,6 +9,7 @@
 		Classe per aggiungere proprietà a FLVPlayback
 		Note that to actually use this class you have to import the FLVPlayback component into the library
 	*/
+	[Deprecated(replacement="kj.video.OVPlayer")]
 	public class FLVPlayer extends FLVPlayback {
 		private var _loop:Boolean;
 		/**
