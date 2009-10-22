@@ -8,7 +8,7 @@
 	 * ...
 	 * @author panzic
 	 */
-	public class BreadthFirstSearch extends GraphsAlgorithm
+	public class DepthFirstSearch extends GraphsAlgorithm
 	{
 		/**
 		 * 
@@ -27,7 +27,7 @@
 			colors[root] = GraphsAlgorithm.GREY;
 			queue.push(root);
 			while (queue.length > 0) {
-				var head:INode = queue.shift() as INode;
+				var head:INode = queue.pop() as INode;
 				if (options.onEncounter) options.onEncounter(head);
 				var out:Array = graph.outgoingNeighbours(head);
 				for each (var n:INode in out) {
