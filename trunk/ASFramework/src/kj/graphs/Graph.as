@@ -34,116 +34,9 @@
 		public function Graph()
 		{
 			nodes = new Array();
-			arcs = new Dictionary;
+			arcs = new Dictionary();
 		}
 		
-		/**
-		 * Performs an iterative depth-first traversal starting at a given node.
-		 * 
-		 * @example The following code shows an example callback function.
-		 * The graph traversal runs until the value '5' is found in the data
-		 * property of a node instance.
-		 * <listing version="3.0">
-		 * var visitNode:Function = function(node:Node):Boolean
-		 * {
-		 *     if (node.data == 5)
-		 *         return false; //terminate traversal
-		 *     return true;
-		 * }
-		 * myGraph.depthFirst(graph.nodes[0], visitNode);
-		 * </listing>
-		 * 
-		 * @param node  The graph node at which the traversal starts.
-		 * @param visit A callback function which is invoked every time a node
-		 *              is visited. The visited node is accessible through
-		 *              the function's first argument. You can terminate the
-		 *              traversal by returning false in the callback function.
-		 
-		public function depthFirst(node:Node, visit:Function):void
-		{
-			if (!node) return;
-			clearMarks();
-			
-			var stack:Array = [node];
-			var c:int = 1, k:int, i:int;
-			var arcs:Array;
-			
-			var n:Node;
-			while (c > 0)
-			{
-				n = stack[--c];
-				if (n.marked) continue;
-				n.marked = true;
-				
-				visit(n);
-				
-			    k = n.numArcs, arcs = n.arcs; 
-				for (i = 0; i < k; i++)
-					stack[c++] = arcs[i].node;
-			}
-		}
-		*/
-		/**
-		 * Performs a breadth-first traversal starting at a given node.
-		 * 
-		 * @example The following code shows an example callback function.
-		 * The graph traversal runs until the value '5' is found in the data
-		 * property of a node instance.
-		 * <listing version="3.0">
-		 * var visitNode:Function = function(node:Node):Boolean
-		 * {
-		 *     if (node.data == 5)
-		 *         return false; //terminate traversal
-		 *     return true;
-		 * }
-		 * myGraph.breadthFirst(graph.nodes[0], visitNode);
-		 * </listing>
-		 * 
-		 * @param node  The graph node at which the traversal starts.
-		 * @param visit A callback function which is invoked every time a node
-		 *              is visited. The visited node is accessible through
-		 *              the function's first argument. You can terminate the
-		 *              traversal by returning false in the callback function.
-		 
-		public function breadthFirst(node:Node, visit:Function):void
-		{
-			if (!node) return;
-			clearMarks();
-			
-			var que:Array = new Array(0x10000);
-			var divisor:int = 0x10000 - 1;
-			var front:int = 0;
-			
-			que[0] = node; 
-			
-			node.marked = true;
-			
-			var c:int = 1, k:int, i:int;
-			var arcs:Array;
-			
-			var v:Node;
-			var w:Node;
-			
-			while (c > 0)
-			{
-				v = que[front];
-				if (!visit(v)) return;
-				
-				arcs = v.arcs, k = v.numArcs;
-				for (i = 0; i < k; i++)
-				{
-					w = arcs[i].node;
-					
-					if (w.marked) continue;
-					w.marked = true;
-					que[int((c++ + front) & divisor)] = w;
-				}
-				
-				if (++front == 0x10000) front = 0;
-				c--;
-			}
-		}
-		*/
 		/**
 		 * Adds a node at a given index to the graph.
 		 * 
@@ -206,6 +99,17 @@
 				}
 			}
 		}
+		
+		/**
+		 * Restituisce un particolare arco nodo.
+		 * @param	index
+		 * @return
+		 */
+		public function getNode(index:uint):INode {
+			if (index >= nodes.length) return null;
+			return nodes[index];
+		}
+		
 		/**
 		 * Permette di ottenere un arco in uscita verso un altro nodo.
 		 * <p>Chiaramente l'arco deve esistere tra quelli in uscita dal nodo chiamante.</p>
